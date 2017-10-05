@@ -1,0 +1,4 @@
+[alias]
+  redo = commit --amend --no-edit
+  undo-commit = reset --soft HEAD^
+  force-push = push --force-with-lease

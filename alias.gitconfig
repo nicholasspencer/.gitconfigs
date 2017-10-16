@@ -1,5 +1,4 @@
 [alias]
   force-push = push --force-with-lease
   redo = commit --amend --no-edit
-  undo = reset --soft HEAD^
   unresolved = diff --name-only --diff-filter=U

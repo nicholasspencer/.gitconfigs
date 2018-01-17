@@ -2,3 +2,4 @@
   force-push = push --force-with-lease
   redo = commit --amend --no-edit
   unresolved = diff --name-only --diff-filter=U
+  lazytree = "!f() { git worktree add $(git root)/../worktrees/\"$1\" \"$1\"; }; f"

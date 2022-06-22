@@ -3,3 +3,9 @@
   redo = commit --amend --no-edit
   unresolved = diff --name-only --diff-filter=U
   lazytree = "!f() { git worktree add $(git root)/../worktrees/\"$1\" \"$1\"; }; f"
+  onelog = log --oneline
+  jira = "!f() { git log $1 | grep -Eo '([A-Z]{3,}-)([0-9]+)' | uniq; }; f"
+  ticket = "!f() { git symbolic-ref HEAD | sed -e 's,.*/\\(.*\\),\\1,'; }; f"
+  what-branch = branch --sort=committerdate
+  dart-stage = add -p **/**.dart
+  yaml-stage = add -p **/**.yaml

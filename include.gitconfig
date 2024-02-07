@@ -1,2 +1,11 @@
+[core]
+  ignorecase = false
 [include]
 	path = alias.gitconfig
+[push]
+  default = current
+  autosetupremote = true
+[init]
+  defaultbranch=main
+[pull]
+  rebase = true

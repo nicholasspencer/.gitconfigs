@@ -1,4 +1,5 @@
 [alias]
+  patch = add -p
   force-push = push --force-with-lease
   redo = commit --amend --no-edit
   unresolved = diff --name-only --diff-filter=U

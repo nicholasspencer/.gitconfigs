@@ -7,25 +7,26 @@
   onelog = log --oneline
   jira = "!f() { git log $1 | grep -Eo '([A-Z]{3,}-)([0-9]+)' | uniq; }; f"
   ticket = "!f() { git symbolic-ref HEAD | sed -e 's,.*/\\(.*\\),\\1,'; }; f"
-  recent-branch = branch --sort=-committerdate -v
+  recent-branch = branch --sort=-committerdate --format='%(objectname:short) %(committerdate:short) %(refname:short)'
+  dart-diff = diff **/**.dart
   dart-stage = add -p **/**.dart
   yaml-stage = add -p **/**.yaml
   amiok = "!f() { \
-        stats=$(git diff --shortstat); \
-        plus=$(echo \"$stats\" | awk '{for(i=1;i<=NF;i++) if($i~\"insertions\") print $(i-1)}'); \
-        minus=$(echo \"$stats\" | awk '{for(i=1;i<=NF;i++) if($i~\"deletions\") print $(i-1)}'); \
-        plus=${plus:-0}; \
-        minus=${minus:-0}; \
-        if [ \"$plus\" -lt 30 ] || [ \"$minus\" -lt 30 ]; then \
-            echo \"Real good, tiny\"; \
-        elif [ \"$plus\" -le 300 ] || [ \"$minus\" -le 300 ]; then \
-            echo \"Good!\"; \
-        elif [ \"$plus\" -le 1000 ] || [ \"$minus\" -le 1000 ]; then \
-            echo \"Getting heavy\"; \
-        else \
-            echo \"Slow down champ, find a stopping point\"; \
-        fi; \
-        if [ \"$minus\" -gt \"$plus\" ]; then \
-            echo \"But hey, you've removed more code than added... always a win.\"; \
-        fi; \
-    }; f"
+    stats=$(git diff --shortstat); \
+    plus=$(echo \"$stats\" | awk '{for(i=1;i<=NF;i++) if($i~\"insertions\") print $(i-1)}'); \
+    minus=$(echo \"$stats\" | awk '{for(i=1;i<=NF;i++) if($i~\"deletions\") print $(i-1)}'); \
+    plus=${plus:-0}; \
+    minus=${minus:-0}; \
+    if [ \"$plus\" -lt 30 ] || [ \"$minus\" -lt 30 ]; then \
+      echo \"Real good, tiny\"; \
+    elif [ \"$plus\" -le 300 ] || [ \"$minus\" -le 300 ]; then \
+      echo \"Good!\"; \
+    elif [ \"$plus\" -le 1000 ] || [ \"$minus\" -le 1000 ]; then \
+      echo \"Getting heavy\"; \
+    else \
+      echo \"Slow down champ, find a stopping point\"; \
+    fi; \
+    if [ \"$minus\" -gt \"$plus\" ]; then \
+      echo \"But hey, you've removed more code than added... always a win.\"; \
+    fi; \
+  }; f"
